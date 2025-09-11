@@ -3,23 +3,22 @@ services:
     image: nginx:stable
     container_name: nginx_proxy
     ports:
-     - "8888:80"
-     - "8883:443"
+      - "80:80"
+      - "443:443"
     volumes:
-     - ./nginx/conf.d:/etc/nginx/conf.d
-#     - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-     - ./nginx/certbot/conf:/etc/letsencrypt
-     - ./nginx/certbot/www:/var/www/certbot
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/certbot/conf:/etc/letsencrypt
+      - ./nginx/certbot/www:/var/www/certbot
     networks:
-     - proxy_network
+      - proxy_network
     restart: always
 
   certbot:
     image: certbot/certbot
     container_name: certbot
     volumes:
-     - ./nginx/certbot/conf:/etc/letsencrypt
-     - ./nginx/certbot/www:/var/www/certbot
+      - ./nginx/certbot/conf:/etc/letsencrypt
+      - ./nginx/certbot/www:/var/www/certbot
 #    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $!; done;'"
 
 networks:
