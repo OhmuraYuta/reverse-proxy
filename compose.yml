@@ -9,6 +9,7 @@ services:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/certbot/conf:/etc/letsencrypt
       - ./nginx/certbot/www:/var/www/certbot
+      - ./staticfiles:/staticfiles
     networks:
       - proxy_network
     restart: always
